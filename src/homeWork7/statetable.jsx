@@ -4,18 +4,18 @@ import { suppliersData } from '../data/supplierData';
 function StateTable() {
     const [suppliers, setsuppliers] = useState(suppliersData) ;
     
-    const sorting = () => [...suppliers].sort((a, b) =>
-    a.companyName > b.companyName ? 1 : -1, )
-
-
     const deletesupplier = (id) => {
         var result = window.confirm("Want to delete?");
         if (result) {
             var filteredsuppliers = suppliers.filter(q => q.id != id);
             setsuppliers([...filteredsuppliers])
     } }
-
-  
+    const sorting = () => {
+        const sortData = [...suppliers].sort((a, b) =>
+        a.companyName.localeCompare(b.companyName) ); 
+        setsuppliers(sortData);
+    }
+        
     
   return (<>
   <h1>Lenght: {suppliers.length}</h1>
