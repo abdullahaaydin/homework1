@@ -1,8 +1,9 @@
 import StateSample from "./stateSample/stateSample";
+import StateTable from "./homeWork7/statetable";
 
 function App() { 
   return (<>
- <StateSample/>
+ <StateTable/>
   </> 
 
 
