@@ -1,9 +1,8 @@
-import ObjectArraySample from "./objectArraySample/ObjectArraySample";
+import StateSample from "./stateSample/stateSample";
 
 function App() { 
   return (<>
-  <ObjectArraySample/>
-  
+ <StateSample/>
   </> 
 
 
