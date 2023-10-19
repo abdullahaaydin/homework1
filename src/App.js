@@ -1,16 +1,14 @@
-import StateSample from "./stateSample/stateSample";
-import StateTable from "./homeWork7/statetable";
+
+import { Route, Routes } from "react-router-dom";
+import SuppliersPage from "./Homework8/Suppliers";
 
 function App() { 
   return (<>
- <StateTable/>
-  </> 
+  <Routes>
+    
+  <Route path="/" element={<SuppliersPage/>}/>
 
-
-
-  )
- 
-  ;
+  </Routes>  
+  </>)
 }
-
 export default App;
