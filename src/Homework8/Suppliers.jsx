@@ -1,4 +1,6 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect} from 'react';
+import axios from 'axios';
+
 
 
 function SuppliersPage() {
@@ -6,13 +8,34 @@ function SuppliersPage() {
     const [suppliers,setSuppliers] = useState([])
 
     useEffect(() => {
-        fetch('https://northwind.vercel.app/api/suppliers')
-        .then(res => res.json())
-        .then(data => {
-            setSuppliers(data);
-        })
+        loadData();
+     
     }, [])
-    
+    function loadData() {
+        fetch("https://northwind.vercel.app/api/suppliers")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setSuppliers(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching data: ", error);
+          });
+      }
+    const deleteSupplier = (id) => {
+        var result = window.confirm("Want to delete?");
+        if (result) {
+          axios
+            .delete("https://northwind.vercel.app/api/suppliers/" + id)
+            .then((res) => {
+              loadData();
+            });
+        }
+      };
     
   return (<>
     <h1>Suppliers Lenght: {suppliers.length}</h1>
@@ -27,22 +50,22 @@ function SuppliersPage() {
             </tr>
         </thead>
         <tbody>{
-            suppliers && suppliers.map(item => {
-                return <tr>
-                    <th></th>
-                    <th>item</th>
-                    <th>item</th>
-                    <th>item</th>
-                    <th><button>Delete</button></th>
+            suppliers && suppliers.map((item) => {
+                return  (<tr>
+                    <th>{item.id}</th>
+                    <th>{item.companyName}</th>
+                    <th>{item.contactName}</th>
+                    <th>{item.address}</th>
+                    <th><button onClick={() => deleteSupplier(item.id)}>Delete</button></th>
                 </tr>
-                
+                );
             })}   
         </tbody>
     </table>
   
   
   </> 
-  )
+  );
    
   
 }
